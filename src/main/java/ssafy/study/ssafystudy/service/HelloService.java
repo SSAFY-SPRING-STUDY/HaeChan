@@ -1,4 +1,4 @@
-package ssafy.study.ssafystudy;
+package ssafy.study.ssafystudy.service;
 
 import org.springframework.stereotype.Service;
 
