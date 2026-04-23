@@ -25,4 +25,8 @@ public class PostRepository {
                 .filter(postEntity -> postEntity.getId().equals(id))
                 .findFirst();
     }
+
+    public void deleteById(Long id) {
+        postDB.removeIf(postEntity -> postEntity.getId().equals(id));
+    }
 }

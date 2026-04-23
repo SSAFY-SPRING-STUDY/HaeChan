@@ -40,4 +40,8 @@ public class PostService {
 
         return PostResponse.fromEntity(entity);
     }
+
+    public void delete(Long id) {
+        postRepository.deleteById(id);
+    }
 }
