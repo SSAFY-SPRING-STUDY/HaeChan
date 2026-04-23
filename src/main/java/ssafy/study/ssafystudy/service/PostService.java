@@ -32,4 +32,12 @@ public class PostService {
                 .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "게시글을 찾을 수 없습니다."));
         return PostResponse.fromEntity(entity);
     }
+
+    public PostResponse update(PostRequest request, Long id) {
+        PostEntity entity = postRepository.findById(id)
+                .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "게시글을 찾을 수 없습니다."));
+        entity.update(request.title(), request.content());
+
+        return PostResponse.fromEntity(entity);
+    }
 }

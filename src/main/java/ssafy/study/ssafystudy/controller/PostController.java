@@ -34,4 +34,10 @@ public class PostController {
         return postService.getPostById(id);
     }
 
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public PostResponse updatePost(@PathVariable Long id, @RequestBody PostRequest request) {
+        return postService.update(request, id);
+    }
+
 }
