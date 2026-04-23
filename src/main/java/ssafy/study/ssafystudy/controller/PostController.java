@@ -7,6 +7,8 @@ import ssafy.study.ssafystudy.controller.dto.PostRequest;
 import ssafy.study.ssafystudy.controller.dto.PostResponse;
 import ssafy.study.ssafystudy.service.PostService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/posts")
 @RequiredArgsConstructor
@@ -17,8 +19,19 @@ public class PostController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public PostResponse createPost(@RequestBody PostRequest request) {
-        return postService.save(request);
+        return postService.create(request);
     }
 
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<PostResponse> getPosts() {
+        return postService.getAllPosts();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public PostResponse getPost(@PathVariable Long id) {
+        return postService.getPostById(id);
+    }
 
 }

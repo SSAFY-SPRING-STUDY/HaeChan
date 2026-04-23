@@ -5,6 +5,7 @@ import ssafy.study.ssafystudy.entity.PostEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class PostRepository {
@@ -13,5 +14,15 @@ public class PostRepository {
     public PostEntity save(PostEntity entity) {
         postDB.add(entity);
         return entity;
+    }
+
+    public List<PostEntity> findAll() {
+        return postDB;
+    }
+
+    public Optional<PostEntity> findById(Long id) {
+        return postDB.stream()
+                .filter(postEntity -> postEntity.getId().equals(id))
+                .findFirst();
     }
 }
