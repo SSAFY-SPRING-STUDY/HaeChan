@@ -18,6 +18,11 @@ public class MemberEntity {
         this.nickname = nickname;
     }
 
+    public boolean checkPassword(String password) {
+        return this.password.equals(password);
+    }
+
+
     public static MemberEntity create(String username, String password, String nickname) {
         return new MemberEntity(AUTO_INCREMENT++, username, password, nickname);
     }
