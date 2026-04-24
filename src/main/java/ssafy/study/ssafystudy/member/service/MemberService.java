@@ -1,7 +1,9 @@
 package ssafy.study.ssafystudy.member.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import ssafy.study.ssafystudy.member.controller.dto.MemberRequest;
 import ssafy.study.ssafystudy.member.controller.dto.MemberResponse;
 import ssafy.study.ssafystudy.member.entity.MemberEntity;
@@ -18,5 +20,12 @@ public class MemberService {
         MemberEntity savedMember = memberRepository.save(member);
 
         return MemberResponse.from(savedMember);
+    }
+
+    public MemberResponse getMemberInfo(Long memberId) {
+        MemberEntity member = memberRepository.findById(memberId)
+                .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        return MemberResponse.from(member);
     }
 }

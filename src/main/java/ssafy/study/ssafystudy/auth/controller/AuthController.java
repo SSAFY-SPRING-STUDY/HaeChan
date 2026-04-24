@@ -24,7 +24,7 @@ public class AuthController {
 
     @PostMapping("/logout")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void logout(@RequestHeader("Authorization") String bearerToken ) {
+    public void logout(@RequestHeader("Authorization") String bearerToken) {
         if(AuthTokenUtils.isValidBearerToken(bearerToken)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "토큰 정보가 유효하지 않습니다.");
         }

@@ -23,4 +23,8 @@ public class MemberRepository {
                         member.getUsername().equals(username))
                 .findFirst();
     }
+
+    public Optional<MemberEntity> findById(Long memberId) {
+        return Optional.ofNullable(memberDB.get(memberId));
+    }
 }
