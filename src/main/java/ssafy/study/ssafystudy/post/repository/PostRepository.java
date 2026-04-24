@@ -1,7 +1,7 @@
-package ssafy.study.ssafystudy.repository;
+package ssafy.study.ssafystudy.post.repository;
 
 import org.springframework.stereotype.Repository;
-import ssafy.study.ssafystudy.entity.PostEntity;
+import ssafy.study.ssafystudy.post.entity.PostEntity;
 
 import java.util.ArrayList;
 import java.util.List;

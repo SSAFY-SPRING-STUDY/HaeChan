@@ -1,13 +1,13 @@
-package ssafy.study.ssafystudy.service;
+package ssafy.study.ssafystudy.post.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import ssafy.study.ssafystudy.controller.dto.PostRequest;
-import ssafy.study.ssafystudy.controller.dto.PostResponse;
-import ssafy.study.ssafystudy.entity.PostEntity;
-import ssafy.study.ssafystudy.repository.PostRepository;
+import ssafy.study.ssafystudy.post.controller.dto.PostRequest;
+import ssafy.study.ssafystudy.post.controller.dto.PostResponse;
+import ssafy.study.ssafystudy.post.entity.PostEntity;
+import ssafy.study.ssafystudy.post.repository.PostRepository;
 
 import java.util.List;
 

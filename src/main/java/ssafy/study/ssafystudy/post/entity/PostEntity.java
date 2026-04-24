@@ -1,4 +1,4 @@
-package ssafy.study.ssafystudy.entity;
+package ssafy.study.ssafystudy.post.entity;
 
 import lombok.Getter;
 

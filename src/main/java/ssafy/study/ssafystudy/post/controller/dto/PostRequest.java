@@ -1,6 +1,6 @@
-package ssafy.study.ssafystudy.controller.dto;
+package ssafy.study.ssafystudy.post.controller.dto;
 
-import ssafy.study.ssafystudy.entity.PostEntity;
+import ssafy.study.ssafystudy.post.entity.PostEntity;
 
 public record PostRequest(
         String title,

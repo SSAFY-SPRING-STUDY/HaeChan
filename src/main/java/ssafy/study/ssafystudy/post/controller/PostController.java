@@ -1,11 +1,11 @@
-package ssafy.study.ssafystudy.controller;
+package ssafy.study.ssafystudy.post.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ssafy.study.ssafystudy.controller.dto.PostRequest;
-import ssafy.study.ssafystudy.controller.dto.PostResponse;
-import ssafy.study.ssafystudy.service.PostService;
+import ssafy.study.ssafystudy.post.controller.dto.PostRequest;
+import ssafy.study.ssafystudy.post.controller.dto.PostResponse;
+import ssafy.study.ssafystudy.post.service.PostService;
 
 import java.util.List;
 
