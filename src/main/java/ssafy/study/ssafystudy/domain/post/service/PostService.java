@@ -28,10 +28,21 @@ public class PostService {
     }
 
     public PostResponse getPostById(Long id) {
-        PostEntity entity = postRepository.findById(id)
-                .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "게시글을 찾을 수 없습니다."));
-        return PostResponse.fromEntity(entity);
+        PostEntity post = postRepository.findById(id)
+                .orElseThrow(()->new CustomException(ErrorCode.POST_NOT_FOUND));
+        return PostResponse.fromEntity(post);
     }
+
+    public PostResponse update(PostRequest request, Long id, Long authorId) {
+        MemberEntity author = memberRepository.findById(authorId).orElseThrow(
+                ()-> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
+
+        PostEntity post = postRepository.findById(id)
+                .orElseThrow(()->new CustomException(ErrorCode.POST_NOT_FOUND));
+
+        if(!post.getAuthor().getId().equals(author.getId())) {
+            throw new CustomException(ErrorCode.INVALID_PERMISSION);
+        }
 
     public PostResponse update(PostRequest request, Long id) {
         PostEntity entity = postRepository.findById(id)

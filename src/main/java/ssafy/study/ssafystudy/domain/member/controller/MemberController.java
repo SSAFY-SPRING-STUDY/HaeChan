@@ -3,12 +3,13 @@ package ssafy.study.ssafystudy.domain.member.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import ssafy.study.ssafystudy.domain.auth.component.SessionManager;
 import ssafy.study.ssafystudy.domain.auth.util.AuthTokenUtils;
 import ssafy.study.ssafystudy.domain.member.controller.dto.MemberRequest;
 import ssafy.study.ssafystudy.domain.member.controller.dto.MemberResponse;
 import ssafy.study.ssafystudy.domain.member.service.MemberService;
+import ssafy.study.ssafystudy.global.exception.CustomException;
+import ssafy.study.ssafystudy.global.exception.error.ErrorCode;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,7 +29,7 @@ public class MemberController {
     @ResponseStatus(HttpStatus.OK)
     public MemberResponse getMyInfo(@RequestParam String bearerToken) {
         if(AuthTokenUtils.isValidBearerToken(bearerToken)) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "토큰 정보가 유효하지 않습니다.");
+            throw new CustomException(ErrorCode.INVALID_TOKEN);
         }
         String sessionKey = AuthTokenUtils.parseBearerToken(bearerToken);
 
