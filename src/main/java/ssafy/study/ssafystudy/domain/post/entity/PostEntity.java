@@ -1,6 +1,7 @@
 package ssafy.study.ssafystudy.domain.post.entity;
 
 import lombok.Getter;
+import ssafy.study.ssafystudy.domain.member.entity.MemberEntity;
 
 @Getter
 public class PostEntity {
@@ -9,21 +10,21 @@ public class PostEntity {
     private Long id;
     private String title;
     private String content;
-    private String author;
+    private MemberEntity author;
 
-    private PostEntity(String title, String content, String author) {
+    private PostEntity(String title, String content, MemberEntity author) {
         this.id = AUTO_INCREMENT++;
         this.title = title;
         this.content = content;
         this.author = author;
     }
 
-    public static PostEntity create(String title, String content, String author) {
-        return new PostEntity(title, content, author);
-    }
-
     public void update(String title, String content) {
         this.title = title;
         this.content = content;
+    }
+
+    public static PostEntity create(String title, String content, MemberEntity author) {
+        return new PostEntity(title, content, author);
     }
 }

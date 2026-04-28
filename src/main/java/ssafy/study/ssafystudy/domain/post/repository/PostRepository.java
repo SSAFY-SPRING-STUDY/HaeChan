@@ -29,4 +29,10 @@ public class PostRepository {
     public void deleteById(Long id) {
         postDB.removeIf(postEntity -> postEntity.getId().equals(id));
     }
+
+    public void delete(PostEntity post) {
+        postDB.removeIf(
+                postEntity -> postEntity.getId().equals(post.getId())
+        );
+    }
 }

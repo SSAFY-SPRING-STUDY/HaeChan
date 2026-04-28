@@ -1,13 +1,15 @@
 package ssafy.study.ssafystudy.domain.post.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+import ssafy.study.ssafystudy.domain.member.entity.MemberEntity;
+import ssafy.study.ssafystudy.domain.member.repository.MemberRepository;
 import ssafy.study.ssafystudy.domain.post.controller.dto.PostRequest;
 import ssafy.study.ssafystudy.domain.post.controller.dto.PostResponse;
 import ssafy.study.ssafystudy.domain.post.entity.PostEntity;
 import ssafy.study.ssafystudy.domain.post.repository.PostRepository;
+import ssafy.study.ssafystudy.global.exception.CustomException;
+import ssafy.study.ssafystudy.global.exception.error.ErrorCode;
 
 import java.util.List;
 
@@ -16,9 +18,14 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final MemberRepository memberRepository;
 
-    public PostResponse create(PostRequest request) {
-        PostEntity savedPost = postRepository.save(request.toEntity());
+    public PostResponse create(PostRequest request, Long authorId) {
+
+        MemberEntity author = memberRepository.findById(authorId).orElseThrow(
+                ()-> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
+
+        PostEntity savedPost = postRepository.save(request.toEntity(author));
         return PostResponse.fromEntity(savedPost);
     }
 
@@ -44,15 +51,22 @@ public class PostService {
             throw new CustomException(ErrorCode.INVALID_PERMISSION);
         }
 
-    public PostResponse update(PostRequest request, Long id) {
-        PostEntity entity = postRepository.findById(id)
-                .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "게시글을 찾을 수 없습니다."));
-        entity.update(request.title(), request.content());
+        post.update(request.title(), request.content());
 
-        return PostResponse.fromEntity(entity);
+        return PostResponse.fromEntity(post);
     }
 
-    public void delete(Long id) {
-        postRepository.deleteById(id);
+    public void delete(Long id, Long authorId) {
+        MemberEntity author = memberRepository.findById(authorId).orElseThrow(
+                ()-> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
+
+        PostEntity post = postRepository.findById(id)
+                .orElseThrow(()->new CustomException(ErrorCode.POST_NOT_FOUND));
+
+        if(!post.getAuthor().getId().equals(author.getId())) {
+            throw new CustomException(ErrorCode.INVALID_PERMISSION);
+        }
+
+        postRepository.delete(post);
     }
 }
