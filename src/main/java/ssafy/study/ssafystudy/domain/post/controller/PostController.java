@@ -24,7 +24,7 @@ public class PostController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public PostResponse createPost(@RequestHeader("Authorization") String bearerToken, @RequestBody PostRequest request) {
-        if(AuthTokenUtils.isValidBearerToken(bearerToken)) {
+        if(!AuthTokenUtils.isValidBearerToken(bearerToken)) {
             throw new CustomException(ErrorCode.INVALID_TOKEN);
         }
         String sessionKey = AuthTokenUtils.parseBearerToken(bearerToken);
@@ -50,7 +50,7 @@ public class PostController {
     public PostResponse updatePost(@PathVariable Long id,
                                    @RequestHeader("Authorization") String bearerToken,
                                    @RequestBody PostRequest request) {
-        if(AuthTokenUtils.isValidBearerToken(bearerToken)) {
+        if(!AuthTokenUtils.isValidBearerToken(bearerToken)) {
             throw new CustomException(ErrorCode.INVALID_TOKEN);
         }
         String sessionKey = AuthTokenUtils.parseBearerToken(bearerToken);
@@ -63,7 +63,7 @@ public class PostController {
     public void deletePost(@PathVariable Long id,
                            @RequestHeader("Authorization") String bearerToken
     ) {
-        if(AuthTokenUtils.isValidBearerToken(bearerToken)) {
+        if(!AuthTokenUtils.isValidBearerToken(bearerToken)) {
             throw new CustomException(ErrorCode.INVALID_TOKEN);
         }
         String sessionKey = AuthTokenUtils.parseBearerToken(bearerToken);

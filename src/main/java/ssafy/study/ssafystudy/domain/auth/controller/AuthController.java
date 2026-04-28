@@ -26,7 +26,7 @@ public class AuthController {
     @PostMapping("/logout")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void logout(@RequestHeader("Authorization") String bearerToken) {
-        if(AuthTokenUtils.isValidBearerToken(bearerToken)) {
+        if(!AuthTokenUtils.isValidBearerToken(bearerToken)) {
             throw new CustomException(ErrorCode.INVALID_TOKEN);
         }
 
