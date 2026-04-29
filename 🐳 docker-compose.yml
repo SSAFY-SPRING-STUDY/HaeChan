@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_container
+    restart: always
+    # .env 파일에 정의된 변수를 자동으로 읽어와 할당합니다.
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${DB_PORT}:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    networks:
+      - backend_network
+
+networks:
+  backend_network:
+    driver: bridge
