@@ -1,11 +1,14 @@
 package ssafy.study.ssafystudy.domain.post.entity;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import ssafy.study.ssafystudy.domain.member.entity.MemberEntity;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -2,6 +2,7 @@ package ssafy.study.ssafystudy.domain.post.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ssafy.study.ssafystudy.domain.member.entity.MemberEntity;
 import ssafy.study.ssafystudy.domain.member.repository.MemberRepository;
 import ssafy.study.ssafystudy.domain.post.controller.dto.PostRequest;
@@ -40,6 +41,7 @@ public class PostService {
         return PostResponse.fromEntity(post);
     }
 
+    @Transactional
     public PostResponse update(PostRequest request, Long id, Long authorId) {
         MemberEntity author = memberRepository.findById(authorId).orElseThrow(
                 ()-> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
