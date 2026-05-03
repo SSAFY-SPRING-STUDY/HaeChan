@@ -27,7 +27,7 @@ public class MemberController {
 
     @GetMapping("/me")
     @ResponseStatus(HttpStatus.OK)
-    public MemberResponse getMyInfo(@RequestParam String bearerToken) {
+    public MemberResponse getMyInfo(@RequestHeader("Authorization") String bearerToken) {
         if(AuthTokenUtils.isValidBearerToken(bearerToken)) {
             throw new CustomException(ErrorCode.INVALID_TOKEN);
         }
